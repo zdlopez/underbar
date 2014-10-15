@@ -146,12 +146,12 @@ var _ = {};
   _.invoke = function(collection, functionOrKey, args) {
     var result = [];
     if(typeof functionOrKey === "function"){
-      _.each(collection, function(item, index){
-        result.push(functionOrKey.apply(item, args));
+      result = _.map(collection, function(item, index){
+        return functionOrKey.apply(item, args);
       });
     } else {
-      _.each(collection, function(item, index){
-        result.push(item[functionOrKey].apply(item, args));
+      result = _.map(collection, function(item, index){
+        return item[functionOrKey].apply(item, args);
       });
     }
     return result;
