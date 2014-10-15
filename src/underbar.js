@@ -80,7 +80,7 @@ var _ = {};
   _.filter = function(collection, test) {
     var result = [];
     
-    _.each(collection, function(item, index){
+    _.each(collection, function(item){
       if(test(item)){
         result.push(item);
       }
@@ -102,7 +102,7 @@ var _ = {};
   _.uniq = function(array) {
     var result = [];
 
-    _.each(array, function(item, index){
+    _.each(array, function(item){
       if(_.indexOf(result, item) === -1){
         result.push(item);
       } 
@@ -117,7 +117,7 @@ var _ = {};
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var result = [];
-    _.each(collection, function(item, index){
+    _.each(collection, function(item){
       result.push(iterator(item));
     });
     return result;
@@ -146,11 +146,11 @@ var _ = {};
   _.invoke = function(collection, functionOrKey, args) {
     var result = [];
     if(typeof functionOrKey === "function"){
-      result = _.map(collection, function(item, index){
+      result = _.map(collection, function(item){
         return functionOrKey.apply(item, args);
       });
     } else {
-      result = _.map(collection, function(item, index){
+      result = _.map(collection, function(item){
         return item[functionOrKey].apply(item, args);
       });
     }
@@ -174,7 +174,7 @@ var _ = {};
     if(accumulator === undefined){
       accumulator = collection[0];
     }
-    _.each(collection, function(item, index){
+    _.each(collection, function(item){
       accumulator = iterator(accumulator, item);
     });
     return accumulator;
@@ -196,6 +196,7 @@ var _ = {};
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    //return _.reduce(collection, function(every, item))
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
