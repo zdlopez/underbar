@@ -299,7 +299,6 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var alreadyCalled = false;
     var result = [];
     return function() {
       if (result[arguments[0]] === undefined) {
