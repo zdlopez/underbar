@@ -145,9 +145,15 @@ var _ = {};
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
     var result = [];
-    _.each(collection, function(item, index){
-      result.push(functionOrKey.apply(item, args));
-    });
+    if(typeof functionOrKey === "function"){
+      _.each(collection, function(item, index){
+        result.push(functionOrKey.apply(item, args));
+      });
+    } else {
+      _.each(collection, function(item, index){
+        result.push(item[functionOrKey].apply(item, args));
+      });
+    }
     return result;
   };
 
