@@ -358,6 +358,7 @@ var _ = {};
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -366,7 +367,59 @@ var _ = {};
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var length = 0;
+    var resultArray = [];
+    _.each(arguments, function(item){
+      if(item.length > length){
+        length = item.length;
+      }
+
+    });
+    for(var i = 0; i<length; i++){
+      resultArray[i] = _.pluck(arguments, i);
+    }
+    return resultArray;
   };
+    
+
+
+
+
+
+
+    /*var longer;
+    var shorter;
+    var temp;
+    var flip = false;
+    var result = [];
+
+    if (arguments[0].length >= arguments[1].length){
+      longer = arguments[0];
+      shorter = arguments[1];
+    } else {
+      longer = arguments[1];
+      shorter = arguments[0];
+      flip = true;
+    }
+
+   
+
+    for (var i = shorter.length; i < longer.length; i++){
+      shorter[i] = undefined;
+    }
+
+     if (flip){
+      temp = longer;
+      longer = shorter;
+      shorter = temp; 
+    }
+
+    for (var y = 0; y < longer.length; y++){
+      result.push([longer[y], shorter[y]]);
+    }
+
+    return result;*/
+  //};
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
   // The new array should contain all elements of the multidimensional array.
