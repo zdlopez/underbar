@@ -373,7 +373,6 @@ var _ = {};
       if(item.length > length){
         length = item.length;
       }
-
     });
     for(var i = 0; i<length; i++){
       resultArray[i] = _.pluck(arguments, i);
@@ -382,50 +381,22 @@ var _ = {};
   };
     
 
-
-
-
-
-
-    /*var longer;
-    var shorter;
-    var temp;
-    var flip = false;
-    var result = [];
-
-    if (arguments[0].length >= arguments[1].length){
-      longer = arguments[0];
-      shorter = arguments[1];
-    } else {
-      longer = arguments[1];
-      shorter = arguments[0];
-      flip = true;
-    }
-
-   
-
-    for (var i = shorter.length; i < longer.length; i++){
-      shorter[i] = undefined;
-    }
-
-     if (flip){
-      temp = longer;
-      longer = shorter;
-      shorter = temp; 
-    }
-
-    for (var y = 0; y < longer.length; y++){
-      result.push([longer[y], shorter[y]]);
-    }
-
-    return result;*/
-  //};
-
   // Takes a multidimensional array and converts it to a one-dimensional array.
   // The new array should contain all elements of the multidimensional array.
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    if(!Array.isArray(result)){
+      result = [];
+    }
+    _.each(nestedArray, function(item){
+      if(Array.isArray(item)){
+        _.flatten(item, result);
+      } else {
+        result.push(item);
+      }
+    });
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
