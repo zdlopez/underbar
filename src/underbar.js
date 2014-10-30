@@ -336,13 +336,11 @@ var _ = {};
     var myarray = [];
     var myarray2 = array.slice(0);
     var index; 
-
-    for (var i = 0; i < array.length; i++){
+    _.each(array, function(value, i){
       index = Math.floor(Math.random() * (myarray2.length));
       myarray[i] = myarray2[index];
       myarray2.splice(index, 1);
-    }
-
+    });
     return myarray;
   };
 
