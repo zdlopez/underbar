@@ -251,11 +251,11 @@ var _ = {};
   // exists in obj
   _.defaults = function(obj) {
     _.each(arguments, function(item){
-      for(var k in item){
-        if(!obj.hasOwnProperty(k)){
-          obj[k] = item[k];
+      _.each(item, function(value, index){
+        if(!obj.hasOwnProperty(index)){
+          obj[index] = value;
         }
-      }
+      });
     });
     return obj;
   };
