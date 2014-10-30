@@ -440,6 +440,30 @@ var _ = {};
   //
   // See the Underbar readme for details.
   _.throttle = function(func, wait) {
+    var execTime = new Date().getTime();
+    var result = func(arguments);
+    var scheduled = false;
+    var first = true;
+
+    return function(){
+      var myTime = new Date().getTime();
+      if (execTime + wait < myTime){
+        result = func(arguments);
+        execTime = new Date().getTime();
+        scheduled = false;
+      }
+      if (!scheduled && !first){
+        scheduled = true;
+        var myWait = execTime + wait - myTime;
+        setTimeout(function(){
+          result = func(arguments);
+          execTime = new Date().getTime();
+          scheduled = false;
+        }, myWait);
+      }
+      first = false;
+      return result;
+    };
   };
 
 }).call(this);
