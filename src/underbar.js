@@ -461,21 +461,22 @@ var _ = {};
     var result = func(arguments);
     var scheduled = false;
     var first = true;
+    var runIt = function(){
+      result = func(arguments);
+      execTime = new Date().getTime();
+      scheduled = false;
+    }
 
     return function(){
       var myTime = new Date().getTime();
       if (execTime + wait < myTime){
-        result = func(arguments);
-        execTime = new Date().getTime();
-        scheduled = false;
+        runIt();
       }
       if (!scheduled && !first){
         scheduled = true;
         var myWait = execTime + wait - myTime;
         setTimeout(function(){
-          result = func(arguments);
-          execTime = new Date().getTime();
-          scheduled = false;
+          runIt();
         }, myWait);
       }
       first = false;
